@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Heirbnb — Adopt a relative. Avoid a tax.</title>
+<meta name="description" content="Heirbnb connects wealthy New York property owners with warm, dependable strangers willing to be legally adopted into the family — so your pied-à-terre stays beautifully occupied and tax-free." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --ink-soft: #4a3f37;
+    --cream: #f6efe4;
+    --cream-deep: #ecdfc8;
+    --paper: #fbf6ec;
+    --accent: #ff5b3a;
+    --accent-deep: #d8421f;
+    --gold: #d4a017;
+    --moss: #4a6b3a;
+    --line: #1a141022;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .grain::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: .06;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', 'Times New Roman', serif; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+  h1 { font-size: clamp(2.6rem, 7vw, 5.6rem); line-height: 1; }
+  h2 { font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05; }
+  h3 { font-size: 1.4rem; line-height: 1.2; }
+  p { margin: 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: rgba(251, 246, 236, 0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+  }
+  .brand .seal {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ff8c6a, var(--accent) 60%, var(--accent-deep));
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,.18), 0 2px 8px rgba(216,66,31,.3);
+    display: grid; place-items: center;
+    color: var(--cream);
+    font-size: 14px;
+  }
+  .nav-links { display: flex; gap: 28px; font-size: .95rem; font-weight: 500; }
+  .nav-links a { opacity: .75; transition: opacity .2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { display: flex; gap: 10px; align-items: center; }
+  @media (max-width: 740px) { .nav-links { display: none; } }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .95rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform .15s ease, box-shadow .2s, background .2s;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--cream);
+    box-shadow: 0 4px 0 var(--accent-deep), 0 8px 30px rgba(26,20,16,.25);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent-deep), 0 12px 30px rgba(26,20,16,.3); }
+  .btn-ghost {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+  .btn-accent {
+    background: var(--accent); color: white;
+  }
+  .btn-accent:hover { transform: translateY(-2px); background: var(--accent-deep); }
+
+  /* HERO */
+  .hero {
+    padding: 80px 0 60px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 920px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: .8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    background: var(--cream-deep); color: var(--ink-soft);
+    padding: 8px 14px; border-radius: 999px;
+    margin-bottom: 24px;
+    border: 1px solid var(--line);
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255,91,58,.18);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(255,91,58,.18); }
+    50% { box-shadow: 0 0 0 8px rgba(255,91,58,.06); }
+  }
+  .hero h1 .accent {
+    font-style: italic;
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .accent::after {
+    content: "";
+    position: absolute; left: -2%; right: -2%; bottom: 6%;
+    height: 14%;
+    background: var(--gold); opacity: .4;
+    z-index: -1;
+    border-radius: 4px;
+    transform: rotate(-1deg);
+  }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 1.2rem;
+    max-width: 540px;
+    color: var(--ink-soft);
+  }
+  .hero-ctas { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-meta {
+    margin-top: 36px;
+    display: flex; align-items: center; gap: 16px;
+    font-size: .9rem;
+    color: var(--ink-soft);
+  }
+  .avatars { display: flex; }
+  .avatars span {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 2px solid var(--paper);
+    margin-left: -8px;
+    background-size: cover;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: .8rem; color: var(--cream);
+  }
+  .avatars span:nth-child(1) { background: linear-gradient(135deg, #ff8c6a, #d8421f); margin-left: 0; }
+  .avatars span:nth-child(2) { background: linear-gradient(135deg, #6b8b5a, #4a6b3a); }
+  .avatars span:nth-child(3) { background: linear-gradient(135deg, #d4a017, #a07a00); }
+  .avatars span:nth-child(4) { background: linear-gradient(135deg, #1a1410, #4a3f37); }
+
+  /* HERO CARD */
+  .hero-card-wrap {
+    position: relative;
+    perspective: 1400px;
+  }
+  .hero-card {
+    background: var(--cream);
+    border-radius: 28px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    box-shadow:
+      0 30px 60px -20px rgba(26,20,16,.25),
+      0 10px 20px -10px rgba(26,20,16,.15);
+    transform: rotate(-1.5deg);
+    position: relative;
+  }
+  .hero-card-2 {
+    position: absolute;
+    top: 20px; right: -30px;
+    width: 180px;
+    background: var(--accent);
+    color: white;
+    border-radius: 18px;
+    padding: 16px;
+    transform: rotate(6deg);
+    box-shadow: 0 20px 40px -10px rgba(216,66,31,.4);
+    font-size: .85rem;
+    z-index: 2;
+  }
+  .hero-card-2 .big { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; line-height: 1; }
+  .hero-card .photo {
+    aspect-ratio: 1.3;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2a3a55 0%, #4a6b8a 40%, #d4a017 100%);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .hero-card .photo::before {
+    content: "🏙️";
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-size: 4rem;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,.3));
+  }
+  .hero-card .photo::after {
+    content: "VACANT · TAXABLE";
+    position: absolute; top: 14px; left: 14px;
+    background: rgba(26,20,16,.85); color: var(--cream);
+    font-size: .7rem; font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 6px 10px;
+    border-radius: 999px;
+  }
+  .hero-card .listing-title { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; }
+  .hero-card .listing-meta { color: var(--ink-soft); font-size: .9rem; margin-top: 4px; }
+  .hero-card .listing-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px dashed var(--line);
+  }
+  .hero-card .listing-row .price { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 700; }
+  .hero-card .listing-row .price s { color: var(--ink-soft); font-size: 1rem; font-weight: 400; margin-right: 8px; }
+
+  /* MARQUEE */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--cream);
+    padding: 18px 0;
+  }
+  .marquee-track {
+    display: flex; gap: 50px;
+    animation: scroll 40s linear infinite;
+    width: max-content;
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .marquee-track span::after { content: "✦"; margin-left: 50px; color: var(--accent); font-style: normal; }
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 0; position: relative; }
+  .section-head { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+  .section-head .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: .8rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .section-head p { margin-top: 18px; color: var(--ink-soft); font-size: 1.1rem; }
+
+  /* HOW IT WORKS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 32px;
+    position: relative;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .step:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(26,20,16,.3); }
+  .step .num {
+    font-family: 'Fraunces', serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: var(--accent);
+    line-height: 1; margin-bottom: 12px;
+    display: block;
+  }
+  .step h3 { margin-bottom: 8px; }
+  .step p { color: var(--ink-soft); font-size: .95rem; }
+
+  /* BROWSE GRID */
+  .browse-tabs {
+    display: flex; justify-content: center; gap: 8px;
+    margin: 0 auto 40px;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    padding: 6px;
+    border-radius: 999px;
+    width: fit-content;
+  }
+  .tab {
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .95rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    transition: background .2s, color .2s;
+  }
+  .tab.active { background: var(--ink); color: var(--cream); }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 920px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .card-grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(26,20,16,.25); }
+  .card .img {
+    aspect-ratio: 1.2;
+    position: relative;
+    display: grid; place-items: center;
+    font-size: 4rem;
+    overflow: hidden;
+  }
+  .badge {
+    position: absolute; top: 14px; left: 14px;
+    background: rgba(255,255,255,.92);
+    color: var(--ink);
+    font-size: .75rem; font-weight: 700;
+    padding: 6px 10px; border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .badge.hot { background: var(--accent); color: white; }
+  .badge.verified { background: var(--moss); color: white; }
+  .card .body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+  .card .title-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px;
+  }
+  .card h3 { font-size: 1.2rem; }
+  .card .stars { color: var(--gold); font-size: .9rem; }
+  .card .desc { color: var(--ink-soft); font-size: .9rem; margin: 8px 0 16px; flex: 1; }
+  .card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .card .tag {
+    font-size: .75rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: var(--ink-soft);
+  }
+  .card .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 14px; border-top: 1px dashed var(--line);
+  }
+  .card .foot .price { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.1rem; }
+  .card .foot .price small { color: var(--ink-soft); font-weight: 400; font-size: .8rem; }
+
+  /* Adoptee cards (people) */
+  .adoptee .img {
+    background: linear-gradient(135deg, #d4a017 0%, #ff8c6a 100%);
+  }
+  .adoptee .img.b { background: linear-gradient(135deg, #6b8b5a, #2a3a55); }
+  .adoptee .img.c { background: linear-gradient(135deg, #4a3f37, #d4a017); }
+
+  /* Property cards */
+  .property .img.a { background: linear-gradient(135deg, #2a3a55 0%, #6b8b5a 100%); }
+  .property .img.b { background: linear-gradient(135deg, #d8421f 0%, #d4a017 100%); }
+  .property .img.c { background: linear-gradient(135deg, #1a1410 0%, #4a3f37 100%); }
+
+  .hidden { display: none !important; }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+  .tier {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 36px 28px;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  .tier.featured {
+    background: var(--ink);
+    color: var(--cream);
+    transform: scale(1.04);
+    box-shadow: 0 24px 60px -20px rgba(26,20,16,.4);
+  }
+  .tier.featured .tier-name { color: var(--accent); }
+  .tier.featured ul li { color: var(--cream); }
+  .tier .badge-top {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: white;
+    font-size: .75rem; font-weight: 700; letter-spacing: 0.1em;
+    padding: 6px 14px; border-radius: 999px;
+    text-transform: uppercase;
+  }
+  .tier-name { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+  .tier-tag { font-size: .9rem; opacity: .7; margin-bottom: 24px; }
+  .tier-price { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 900; line-height: 1; }
+  .tier-price small { font-size: 1rem; font-weight: 500; opacity: .6; }
+  .tier hr { border: none; border-top: 1px dashed currentColor; opacity: .2; margin: 24px 0; }
+  .tier ul { list-style: none; padding: 0; margin: 0 0 28px; }
+  .tier ul li { padding: 8px 0; font-size: .95rem; display: flex; align-items: flex-start; gap: 10px; color: var(--ink-soft); }
+  .tier ul li::before { content: "✓"; color: var(--accent); font-weight: 700; }
+  .tier .btn { width: 100%; justify-content: center; margin-top: auto; }
+
+  /* TESTIMONIALS */
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .quotes { grid-template-columns: 1fr; } }
+  .quote {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+  }
+  .quote::before {
+    content: "“";
+    position: absolute;
+    top: -14px; left: 16px;
+    font-family: 'Fraunces', serif;
+    font-size: 5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .quote p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-style: italic; line-height: 1.4; margin-bottom: 18px; }
+  .quote .who { display: flex; gap: 12px; align-items: center; }
+  .quote .who .av { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: white; font-weight: 700; }
+  .quote .who .name { font-weight: 600; font-size: .95rem; }
+  .quote .who .role { font-size: .8rem; color: var(--ink-soft); }
+
+  /* FAQ */
+  .faq { max-width: 800px; margin: 0 auto; }
+  .faq details {
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    cursor: pointer;
+  }
+  .faq details summary {
+    list-style: none;
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+  }
+  .faq details summary::-webkit-details-marker { display: none; }
+  .faq details summary::after {
+    content: "+";
+    font-family: 'Inter', sans-serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    transition: transform .25s;
+  }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { margin-top: 14px; color: var(--ink-soft); font-size: 1rem; }
+
+  /* CTA */
+  .cta-band {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 36px;
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-band h2 { color: var(--cream); }
+  .cta-band .accent { color: var(--accent); font-style: italic; }
+  .cta-band p { color: rgba(246,239,228,.7); margin: 20px auto 32px; max-width: 560px; font-size: 1.1rem; }
+  .cta-band .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cta-band .btn-ghost { color: var(--cream); border-color: var(--cream); }
+  .cta-band .btn-ghost:hover { background: var(--cream); color: var(--ink); }
+  .cta-band::before {
+    content: ""; position: absolute;
+    width: 400px; height: 400px;
+    background: var(--accent);
+    border-radius: 50%;
+    top: -150px; right: -120px;
+    opacity: .25;
+    filter: blur(60px);
+  }
+  .cta-band::after {
+    content: ""; position: absolute;
+    width: 300px; height: 300px;
+    background: var(--gold);
+    border-radius: 50%;
+    bottom: -120px; left: -80px;
+    opacity: .15;
+    filter: blur(60px);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--line);
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 800px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  .foot-grid h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: .8rem; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+    color: var(--ink-soft);
+  }
+  .foot-grid ul { list-style: none; padding: 0; margin: 0; }
+  .foot-grid ul li { padding: 6px 0; font-size: .95rem; }
+  .foot-grid ul li a { opacity: .75; }
+  .foot-grid ul li a:hover { opacity: 1; color: var(--accent); }
+  .foot-tag { font-size: .9rem; color: var(--ink-soft); max-width: 320px; margin-top: 14px; }
+  .disclaimer {
+    background: var(--cream-deep);
+    border: 1px dashed var(--ink-soft);
+    border-radius: 16px;
+    padding: 20px 24px;
+    font-size: .82rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .disclaimer strong { color: var(--ink); }
+  .foot-bottom {
+    margin-top: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: .85rem; color: var(--ink-soft);
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  /* helpers */
+  .float { animation: float 6s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+    50% { transform: translateY(-12px) rotate(-1deg); }
+  }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  ::selection { background: var(--accent); color: white; }
+</style>
+</head>
+<body class="grain">
+
+<nav class="top">
+  <div class="container nav-row">
+    <a href="#" class="brand">
+      <span class="seal">H</span>
+      <span>Heirbnb</span>
+    </a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#browse">Browse</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#browse" class="btn btn-ghost">Sign in</a>
+      <a href="#cta" class="btn btn-primary">Get adopted →</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Tax season ends. Family begins.</span>
+      <h1>Adopt a relative.<br/>Avoid a <span class="accent">pied-à-terre tax</span>.</h1>
+      <p class="hero-sub">
+        New York's new vacancy surcharge punishes empty second homes. We connect property owners with
+        warm, dependable, <em>tax-exempt-by-blood</em> strangers willing to be legally adopted into the family —
+        so your Tribeca pied-à-terre stays beautifully occupied and 100% tax-free.
+      </p>
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn btn-primary">I own a vacant home →</a>
+        <a href="#browse" class="btn btn-ghost">I'd love a free apartment</a>
+      </div>
+      <div class="hero-meta">
+        <div class="avatars">
+          <span>M</span><span>R</span><span>K</span><span>+</span>
+        </div>
+        <div>Trusted by <strong>2,400+ families</strong> on paper since 2026</div>
+      </div>
+    </div>
+
+    <div class="hero-card-wrap">
+      <div class="hero-card float">
+        <div class="photo"></div>
+        <div class="listing-title">3BR Loft · Tribeca</div>
+        <div class="listing-meta">Last occupied: Spring 2019 · Status: weeping</div>
+        <div class="listing-row">
+          <div>
+            <div style="font-size:.8rem; color: var(--ink-soft); letter-spacing: 0.08em;">ANNUAL TAX EXPOSURE</div>
+            <div class="price"><s>$184,200</s> $0</div>
+          </div>
+          <a href="#" class="btn btn-accent" style="padding: 10px 16px;">Adopt me</a>
+        </div>
+      </div>
+      <div class="hero-card-2">
+        <div style="font-size:.7rem; letter-spacing: 0.1em; opacity: .85;">YOU SAVED</div>
+        <div class="big">$184k</div>
+        <div style="margin-top: 4px; opacity: .9;">in five business days</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>family is forever (or at least one fiscal year)</span>
+    <span>now hiring: nephews</span>
+    <span>as featured in the new york post (briefly)</span>
+    <span>legally binding · spiritually flexible</span>
+    <span>your second home deserves a second cousin</span>
+    <span>family is forever (or at least one fiscal year)</span>
+    <span>now hiring: nephews</span>
+    <span>as featured in the new york post (briefly)</span>
+    <span>legally binding · spiritually flexible</span>
+    <span>your second home deserves a second cousin</span>
+  </div>
+</div>
+
+<section id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">How it works</div>
+      <h2>Three steps to a beautiful, tax-deductible bond.</h2>
+      <p>We've streamlined kinship the way Stripe streamlined payments. It's <em>almost</em> uncomfortable how easy this is.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">01</span>
+        <h3>Browse the family tree.</h3>
+        <p>Filter prospective relatives by warmth, discretion, dietary requirements, and ability to call you "Mama" without flinching at the holiday table.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">02</span>
+        <h3>Sign the paperwork.</h3>
+        <p>Our white-shoe partner firm handles the adoption, the deed, the trust amendment, and the awkward email to your actual children.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">03</span>
+        <h3>Skip the tax. Forever.</h3>
+        <p>Your new relative moves in. The unit is occupied. The auditor exhales. You exhale. Everyone wins, except the city budget.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="browse" style="padding-top: 40px;">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">The marketplace</div>
+      <h2>Meet your new family. Or your new home.</h2>
+      <p>Every listing is background-checked, vibe-checked, and lightly notarized.</p>
+    </div>
+
+    <div class="browse-tabs reveal">
+      <button class="tab active" data-tab="adoptees">👤 Available relatives</button>
+      <button class="tab" data-tab="properties">🏙️ Available homes</button>
+    </div>
+
+    <!-- Adoptees -->
+    <div class="card-grid" data-pane="adoptees">
+      <div class="card adoptee reveal">
+        <div class="img">
+          <span class="badge hot">★ Top pick</span>
+          🧑‍🎨
+        </div>
+        <div class="body">
+          <div class="title-row"><h3>Margot, 28</h3><div class="stars">★★★★★</div></div>
+          <p class="desc">MFA dropout, plays cello, has a tasteful Instagram and a passport. Would credibly pass as "the artistic one we don't talk about much."</p>
+          <div class="tags">
+            <span class="tag">Niece-coded</span>
+            <span class="tag">Allergies: none</span>
+            <span class="tag">Plant care: expert</span>
+          </div>
+          <div class="foot">
+            <div class="price">$2,400<small>/mo stipend</small></div>
+            <a href="#" class="btn btn-ghost" style="padding: 8px 14px; font-size: .85rem;">View profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card adoptee reveal">
+        <div class="img b">
+          <span class="badge verified">✓ Background-checked</span>
+          🧓
+        </div>
+        <div class="body">
+          <div class="title-row"><h3>Reginald, 64</h3><div class="stars">★★★★½</div></div>
+          <p class="desc">Retired actuary. Will pretend to be your estranged uncle who finally "came back from Lisbon." Brings his own slippers and gravitas.</p>
+          <div class="tags">
+            <span class="tag">Uncle-tier</span>
+            <span class="tag">Quiet</span>
+            <span class="tag">Owns a robe</span>
+          </div>
+          <div class="foot">
+            <div class="price">$1,800<small>/mo stipend</small></div>
+            <a href="#" class="btn btn-ghost" style="padding: 8px 14px; font-size: .85rem;">View profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card adoptee reveal">
+        <div class="img c">
+          <span class="badge">New</span>
+          👨‍💼
+        </div>
+        <div class="body">
+          <div class="title-row"><h3>Tobias, 34</h3><div class="stars">★★★★★</div></div>
+          <p class="desc">Former finance guy "between things." Can attend Thanksgiving, laugh at jokes about the Hamptons, and recite the Schwartz family history on cue.</p>
+          <div class="tags">
+            <span class="tag">Cousin-grade</span>
+            <span class="tag">Good blazer</span>
+            <span class="tag">No exes locally</span>
+          </div>
+          <div class="foot">
+            <div class="price">$2,100<small>/mo stipend</small></div>
+            <a href="#" class="btn btn-ghost" style="padding: 8px 14px; font-size: .85rem;">View profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Properties -->
+    <div class="card-grid hidden" data-pane="properties">
+      <div class="card property reveal">
+        <div class="img a">
+          <span class="badge hot">Urgent · audit pending</span>
+          🏙️
+        </div>
+        <div class="body">
+          <div class="title-row"><h3>Tribeca 3BR Loft</h3><div class="stars">★★★★★</div></div>
+          <p class="desc">3,200 sqft. Doorman. Three espresso machines, none used. Owners visit twice a year to "check on the art." Yours, if you'll just smile in the elevator.</p>
+          <div class="tags">
+            <span class="tag">Tax bill: $184k</span>
+            <span class="tag">Doorman</span>
+            <span class="tag">Roof access</span>
+          </div>
+          <div class="foot">
+            <div class="price">$0<small>/mo rent</small></div>
+            <a href="#" class="btn btn-ghost" style="padding: 8px 14px; font-size: .85rem;">Apply to live here</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card property reveal">
+        <div class="img b">
+          <span class="badge verified">✓ Vacant 11 months/yr</span>
+          🏛️
+        </div>
+        <div class="body">
+          <div class="title-row"><h3>UES Pre-War Classic Six</h3><div class="stars">★★★★½</div></div>
+          <p class="desc">Park views. Original moulding. Family is "Geneva-based." You'll be expected to attend one birthday in October and feed an elderly tortoise named Walter.</p>
+          <div class="tags">
+            <span class="tag">Tax bill: $96k</span>
+            <span class="tag">Tortoise included</span>
+            <span class="tag">Park-facing</span>
+          </div>
+          <div class="foot">
+            <div class="price">$0<small>/mo rent</small></div>
+            <a href="#" class="btn btn-ghost" style="padding: 8px 14px; font-size: .85rem;">Apply to live here</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card property reveal">
+        <div class="img c">
+          <span class="badge">New listing</span>
+          🌆
+        </div>
+        <div class="body">
+          <div class="title-row"><h3>Brooklyn Heights Brownstone</h3><div class="stars">★★★★★</div></div>
+          <p class="desc">Whole house. Garden. Owners last seen 2023. Light expectations: water the fig tree, learn surname pronunciation, do not redecorate without WhatsApp approval.</p>
+          <div class="tags">
+            <span class="tag">Tax bill: $142k</span>
+            <span class="tag">Private garden</span>
+            <span class="tag">Fig tree (named)</span>
+          </div>
+          <div class="foot">
+            <div class="price">$0<small>/mo rent</small></div>
+            <a href="#" class="btn btn-ghost" style="padding: 8px 14px; font-size: .85rem;">Apply to live here</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">For property owners</div>
+      <h2>Family plans, priced like Stripe.</h2>
+      <p>Every tier saves more than it costs. We did the math. So did your accountant. So did the accountant we hired to double-check.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="tier reveal">
+        <div class="tier-name">Distant Cousin</div>
+        <div class="tier-tag">For the second home you forgot you owned.</div>
+        <div class="tier-price">$899<small>/mo</small></div>
+        <hr/>
+        <ul>
+          <li>One (1) lightly-related adoptee</li>
+          <li>Quarterly check-in calls</li>
+          <li>Holiday card cameo</li>
+          <li>Standard legal adoption package</li>
+        </ul>
+        <a href="#cta" class="btn btn-ghost">Choose Cousin</a>
+      </div>
+
+      <div class="tier featured reveal">
+        <span class="badge-top">Most popular</span>
+        <div class="tier-name">The Heir Apparent</div>
+        <div class="tier-tag">For the apartment your auditor noticed.</div>
+        <div class="tier-price" style="color: var(--cream);">$2,499<small style="color: var(--cream); opacity:.6;">/mo</small></div>
+        <hr/>
+        <ul>
+          <li>Premium adoptee (interviewed, vetted, vibey)</li>
+          <li>Full legal adoption + name change optional</li>
+          <li>Attends two (2) family functions/year</li>
+          <li>Concierge "alibi support" team</li>
+          <li>Dedicated estate attorney</li>
+        </ul>
+        <a href="#cta" class="btn btn-accent">Choose Heir</a>
+      </div>
+
+      <div class="tier reveal">
+        <div class="tier-name">Dynasty</div>
+        <div class="tier-tag">For the entire portfolio. We don't judge.</div>
+        <div class="tier-price">Let's talk</div>
+        <hr/>
+        <ul>
+          <li>Adoptees for up to 12 properties</li>
+          <li>Coordinated family lore across units</li>
+          <li>White-glove relative concierge</li>
+          <li>Dedicated CPA + offshore liaison</li>
+          <li>Quarterly cocktails with the founder</li>
+        </ul>
+        <a href="#cta" class="btn btn-ghost">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" style="background: var(--cream-deep); margin: 40px 24px; border-radius: 36px;">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">The reviews are in</div>
+      <h2>Real warmth. Real loopholes.</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal">
+        <p>I now have a son named Brent. He lives in my Soho place, waters the orchids, and saved me $97,000 last quarter. We're closer than I am with my actual kids.</p>
+        <div class="who">
+          <div class="av" style="background: linear-gradient(135deg, #ff8c6a, #d8421f);">DW</div>
+          <div>
+            <div class="name">Diane W.</div>
+            <div class="role">Hedge fund LP · Adopted Brent (32)</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote reveal">
+        <p>I went from couch-surfing in Bushwick to brownstone-sitting in the Heights. My new "mother" lives in Aspen. I water the fig. I am the fig now.</p>
+        <div class="who">
+          <div class="av" style="background: linear-gradient(135deg, #6b8b5a, #4a6b3a);">JT</div>
+          <div>
+            <div class="name">Jordan T.</div>
+            <div class="role">Adoptee · Heirbnb member since '26</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote reveal">
+        <p>The tax was a vibe killer. Heirbnb sent over a charming young man named Aleksei who calls me Tante on Tuesdays. We've never been happier. The auditor agrees.</p>
+        <div class="who">
+          <div class="av" style="background: linear-gradient(135deg, #d4a017, #a07a00);">FK</div>
+          <div>
+            <div class="name">Friedrich K.</div>
+            <div class="role">Real estate heir · Three pieds, zero taxes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">Questions you whispered to your accountant</div>
+      <h2>Frequently dodged questions.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Is this… legal?</summary>
+        <p>Heirbnb operates in the lush grey area where the tax code meets the family code. Our adoptions are real, our deeds are real, and our paperwork has been very lightly winked at by a real lawyer. Consult yours.</p>
+      </details>
+      <details>
+        <summary>What if I already have children?</summary>
+        <p>You can have more. Many of our most successful clients describe their original children as "starter children." Your new relative will be told about them on a need-to-know basis.</p>
+      </details>
+      <details>
+        <summary>Can my adoptee throw parties?</summary>
+        <p>Family plans of <strong>The Heir Apparent</strong> tier and above include two (2) tasteful gatherings per quarter. Dynasty members may negotiate a private nightclub clause.</p>
+      </details>
+      <details>
+        <summary>What if we don't get along?</summary>
+        <p>Our concierge team handles emotional disentanglement, legal de-adoption, and a courteous goodbye basket. Most families just stop returning each other's calls — which, statistically, is normal.</p>
+      </details>
+      <details>
+        <summary>What if the city closes this loophole?</summary>
+        <p>We have already begun work on Heirbnb 2: trust-based shell families. Your subscription will be grandfathered. Pun very much intended.</p>
+      </details>
+      <details>
+        <summary>Is this a real website?</summary>
+        <p>No. This is satire. Please do not adopt a stranger to dodge a tax. Probably.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="cta" style="padding-top: 40px;">
+  <div class="container">
+    <div class="cta-band reveal">
+      <h2>Your apartment is empty.<br/><span class="accent">Your family doesn't have to be.</span></h2>
+      <p>Join 2,400+ New Yorkers turning vacancy into kinship and tax bills into family heirlooms.</p>
+      <div class="cta-row">
+        <a href="#pricing" class="btn btn-accent">List my property</a>
+        <a href="#browse" class="btn btn-ghost">Browse relatives</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="brand">
+          <span class="seal">H</span>
+          <span>Heirbnb</span>
+        </a>
+        <p class="foot-tag">A modern marketplace for modern families. Headquartered in a Tribeca loft that, by sheer coincidence, also belongs to one of our customers.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#browse">Browse</a></li>
+          <li><a href="#">Trust & safety</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For owners</h4>
+        <ul>
+          <li><a href="#">List a property</a></li>
+          <li><a href="#">Tax calculator</a></li>
+          <li><a href="#">Estate attorneys</a></li>
+          <li><a href="#">Concierge</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For adoptees</h4>
+        <ul>
+          <li><a href="#">Create a profile</a></li>
+          <li><a href="#">Stipend guide</a></li>
+          <li><a href="#">Family handbook</a></li>
+          <li><a href="#">Exit support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Please read:</strong> Heirbnb is a work of satire created in response to New York City's proposed pied-à-terre tax. It is not a real company. No adoptions are being arranged. No taxes are being dodged. If you are a wealthy property owner reading this with genuine interest, please take a long walk and consider paying your fair share.
+    </div>
+
+    <div class="foot-bottom">
+      <div>© 2026 Heirbnb, Inc. (not actually Inc.) — A satirical project.</div>
+      <div>
+        <a href="#">Terms (fake)</a> · <a href="#">Privacy (also fake)</a> · <a href="#">Press kit (real, kind of)</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.tab');
+  const panes = document.querySelectorAll('[data-pane]');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      const target = t.dataset.tab;
+      panes.forEach(p => {
+        p.classList.toggle('hidden', p.dataset.pane !== target);
+      });
+    });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const t = document.querySelector(id);
+        if (t) {
+          e.preventDefault();
+          t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
