@@ -22,14 +22,13 @@
     --line: #1a141022;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; overflow-x: clip; }
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--ink);
     background: var(--paper);
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
   .grain::before {
     content: "";
@@ -41,7 +40,7 @@
   }
   a { color: inherit; text-decoration: none; }
   h1, h2, h3, h4 { font-family: 'Fraunces', 'Times New Roman', serif; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
-  h1 { font-size: clamp(2.6rem, 7vw, 5.6rem); line-height: 1; }
+  h1 { font-size: clamp(2.2rem, 7vw, 5.6rem); line-height: 1; overflow-wrap: break-word; }
   h2 { font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05; }
   h3 { font-size: 1.4rem; line-height: 1.2; }
   p { margin: 0; }
@@ -78,7 +77,93 @@
   .nav-links a { opacity: .75; transition: opacity .2s; }
   .nav-links a:hover { opacity: 1; }
   .nav-cta { display: flex; gap: 10px; align-items: center; }
-  @media (max-width: 740px) { .nav-links { display: none; } }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    width: 44px; height: 44px;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 60;
+  }
+  .hamburger span {
+    display: block;
+    position: absolute;
+    left: 10px; right: 10px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease, top .25s ease;
+  }
+  .hamburger span:nth-child(1) { top: 14px; }
+  .hamburger span:nth-child(2) { top: 21px; }
+  .hamburger span:nth-child(3) { top: 28px; }
+  .hamburger.open { visibility: hidden; }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 88px 24px 28px;
+    transform: translateY(-100%);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+    z-index: 55;
+    box-shadow: 0 20px 40px -20px rgba(26,20,16,.25);
+  }
+  .mobile-menu.open { transform: translateY(0); }
+  .mobile-menu a.mobile-link {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu .mobile-ctas {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 22px;
+  }
+  .mobile-menu .mobile-ctas .btn { justify-content: center; width: 100%; }
+
+  .mobile-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 44px; height: 44px;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 0;
+    display: grid; place-items: center;
+    z-index: 1;
+  }
+  .mobile-close::before,
+  .mobile-close::after {
+    content: "";
+    position: absolute;
+    width: 20px; height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .mobile-close::before { transform: rotate(45deg); }
+  .mobile-close::after { transform: rotate(-45deg); }
+
+  @media (max-width: 740px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: block; }
+    .container { padding: 0 20px; }
+    .nav-row { padding: 18px 12px; }
+    .brand { padding-left: 4px; }
+    .hero { padding: 28px 0 48px; }
+    .hero-card-2 { right: 10px; top: -10px; }
+  }
 
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -142,17 +227,10 @@
   .hero h1 .accent {
     font-style: italic;
     color: var(--accent);
-    position: relative;
-    display: inline-block;
-  }
-  .hero h1 .accent::after {
-    content: "";
-    position: absolute; left: -2%; right: -2%; bottom: 6%;
-    height: 14%;
-    background: var(--gold); opacity: .4;
-    z-index: -1;
-    border-radius: 4px;
-    transform: rotate(-1deg);
+    background-image: linear-gradient(transparent 72%, rgba(212,160,23,.4) 72%, rgba(212,160,23,.4) 88%, transparent 88%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: 0 2px;
   }
   .hero-sub {
     margin-top: 28px;
@@ -606,8 +684,22 @@
       <a href="#browse" class="btn btn-ghost">Sign in</a>
       <a href="#cta" class="btn btn-primary">Get adopted →</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu"></button>
+  <a href="#how" class="mobile-link">How it works</a>
+  <a href="#browse" class="mobile-link">Browse</a>
+  <a href="#pricing" class="mobile-link">Pricing</a>
+  <a href="#faq" class="mobile-link">FAQ</a>
+  <div class="mobile-ctas">
+    <a href="#browse" class="btn btn-ghost">Sign in</a>
+    <a href="#cta" class="btn btn-primary">Get adopted →</a>
+  </div>
+</div>
 
 <header class="hero">
   <div class="container hero-grid">
@@ -1035,6 +1127,22 @@
 </footer>
 
 <script>
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const setMenu = (open) => {
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    mobileMenu.setAttribute('aria-hidden', !open);
+    document.documentElement.style.overflowY = open ? 'hidden' : '';
+  };
+  hamburger.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+  document.getElementById('mobileClose').addEventListener('click', () => setMenu(false));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
   // Tab switching
   const tabs = document.querySelectorAll('.tab');
   const panes = document.querySelectorAll('[data-pane]');
